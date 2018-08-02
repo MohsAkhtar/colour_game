@@ -4,6 +4,22 @@ var pickedColour = pickColour();
 var colourDisplay = document.getElementById("colourDisplay");
 var messageDisplay = document.getElementById("message");
 var h1 = document.querySelector("h1");
+var resetButton = document.querySelector("#reset");
+
+resetButton.addEventListener("click", function() {
+  // generate all new colours
+  colours = generateRandomColours(6);
+  // pick a new random colour from array
+  pickedColour = pickColour();
+  // change colour display to match new picked colour
+  colourDisplay.textContent = pickedColour;
+  // change colours of square
+  for (var i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colours[i];
+  }
+  // resets heading background
+  h1.style.backgroundColor = "#232323";
+});
 
 colourDisplay.textContent = pickedColour;
 
@@ -22,6 +38,7 @@ for (var i = 0; i < squares.length; i++) {
     if (clickedColour === pickedColour) {
       // changes message above colours
       messageDisplay.textContent = "Correct!";
+      resetButton.textContent = "Play Again?";
       // if guessed right all changeColours is
       // passed the correct colour
       changeColours(clickedColour);
